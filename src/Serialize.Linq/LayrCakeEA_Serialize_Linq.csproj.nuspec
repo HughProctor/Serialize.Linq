@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>LayrCakeEA_Serialize_Linq</id>
+    <version>3.0.0-beta</version>
+    <authors>LayrCakeEA</authors>
+    <owners>Hugh</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>An extension of the NCommon container adapter for Castle Windsor</description>
+    <tags>LayrCakeEA</tags>
+    <dependencies>
+      <group targetFramework=".NETFramework4.6.2" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\..\_Packages\net462\Serialize.Linq.pdb" target="lib\net462" />
+  </files>
+</package>

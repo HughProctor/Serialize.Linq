@@ -22,7 +22,8 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <!--<PackageReadmeFile>README.md</PackageReadmeFile>-->
+    <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
   </PropertyGroup>
 
   <PropertyGroup>
