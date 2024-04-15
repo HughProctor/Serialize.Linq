@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Serialize.Linq.Interfaces;
 
@@ -15,7 +16,7 @@ namespace Serialize.Linq.Internals
                 "You could use the NuGet package 'System.AppDomain.NetCoreApp' which mimics the AppDomain."
             );
 #else
-            return AppDomain.CurrentDomain.GetAssemblies();
+            return AppDomain.CurrentDomain.GetAssemblies().Where(x => !x.GlobalAssemblyCache);
 #endif
         }
     }

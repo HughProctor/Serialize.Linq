@@ -6,6 +6,8 @@ using System.Collections.Concurrent;
 using System.Linq.Expressions;
 using Serialize.Linq.Interfaces;
 using Serialize.Linq.Nodes;
+using Serialize.Linq.LayrCakeCustom;
+using System.Linq;
 
 namespace Serialize.Linq
 {
@@ -13,11 +15,13 @@ namespace Serialize.Linq
     {
         private readonly ConcurrentDictionary<string, ParameterExpression> _parameterExpressions;
         private readonly ConcurrentDictionary<string, Type> _typeCache;
+        internal readonly List<ExternalNamespace> _typeLayrCakeCache;
 
         protected ExpressionContextBase()
         {
             _parameterExpressions = new ConcurrentDictionary<string, ParameterExpression>();
             _typeCache = new ConcurrentDictionary<string, Type>();
+            _typeLayrCakeCache = TypeResolver_Helper.GetNamespaces();
         }
 
         public bool AllowPrivateFieldAccess { get; set; }
@@ -51,11 +55,21 @@ namespace Serialize.Linq
                 var type = Type.GetType(n);
                 if (type == null)
                 {
-                    foreach (var assembly in GetAssemblies())
+                    foreach (var assembly in GetAssemblies().Where(x => !x.GlobalAssemblyCache))
                     {
                         type = assembly.GetType(n);
                         if (type != null)
                             break;
+                        foreach (var item in _typeLayrCakeCache)
+                        {
+                            var newTypeName = item.NameSpace + "." + n.Split('.').Last().Replace(item.SuffixRemove, item.SuffixReplace);
+                            type = assembly.GetType(newTypeName);
+                            if (type != null)
+                                break;
+                        }
+                        if (type != null)
+                            break;
+
                     }
 
                 }

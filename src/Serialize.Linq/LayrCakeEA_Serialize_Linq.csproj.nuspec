@@ -13,6 +13,7 @@
     </dependencies>
   </metadata>
   <files>
+    <file src="..\..\_Packages\net462\Serialize.Linq.dll" target="lib\net462" />
     <file src="..\..\_Packages\net462\Serialize.Linq.pdb" target="lib\net462" />
   </files>
 </package>

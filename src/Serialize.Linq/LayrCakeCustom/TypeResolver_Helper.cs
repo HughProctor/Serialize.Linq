@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
@@ -20,7 +21,7 @@ namespace Serialize.Linq.LayrCakeCustom
             List<ExternalNamespace> namespaceList = new List<ExternalNamespace>();
             try
             {
-                var assembly = Assembly.GetEntryAssembly() == null ? Assembly.GetExecutingAssembly() : Assembly.GetEntryAssembly();
+                var assembly = Assembly.GetEntryAssembly() ?? Assembly.GetCallingAssembly();
                 var config = ConfigurationManager.OpenExeConfiguration(assembly.Location);
                 if (config == null)
                 {
@@ -36,7 +37,7 @@ namespace Serialize.Linq.LayrCakeCustom
                     //throw new ConfigurationErrorsException("Failed to load 'expressionSettings' configuration section.");
                     return namespaceList;
                 }
-                foreach (ExpressionConfigurationElement expressionElement in ((ExpressionConfigurationSection)expressionSection).Expressions)
+                foreach (ExpressionConfigurationElement expressionElement in expressionSection.Expressions)
                 {
                     namespaceList.Add(new ExternalNamespace
                         {

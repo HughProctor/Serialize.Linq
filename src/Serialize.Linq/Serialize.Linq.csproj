@@ -129,6 +129,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="ExpressionContextBase.cs" />
+    <Compile Remove="ExpressionContext_OLD.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="..\..\LICENSE" Pack="true" PackagePath="" />
     <None Include="..\..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
